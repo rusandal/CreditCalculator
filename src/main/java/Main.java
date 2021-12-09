@@ -6,8 +6,10 @@ public class Main {
         int sum = 1999999;
         double percent = 12.5;
         int monthCount = 24;
-        System.out.println("Ежемесячны"+new BigDecimal(sum*((percent/12/100)+(percent/12/100)/(Math.pow(1+(percent/12/100), monthCount)-1))).setScale(2, RoundingMode.HALF_UP));
-        System.out.println("Сумма возврата"+new BigDecimal(monthCount*(sum*((percent/12/100)+(percent/12/100)/(Math.pow((1+percent/12/100), monthCount)-1)))).setScale(2, RoundingMode.HALF_UP));
-        System.out.println("Переплата"+new BigDecimal(sum*((percent/12/100)+(percent/12/100)/(Math.pow(1+(percent/12/100), monthCount)-1))*monthCount-sum).setScale(2, RoundingMode.HALF_UP));
+
+        CreditCalculator creditCalculator = new CreditCalculator(sum, percent,monthCount);
+        System.out.println("Ежемесячный платеж"+creditCalculator.monthlyPayment());
+        System.out.println("Сумма возврата"+creditCalculator.refundAmount());
+        System.out.println("Переплата"+creditCalculator.overpayment());
     }
 }

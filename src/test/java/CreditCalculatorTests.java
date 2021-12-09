@@ -11,7 +11,7 @@ public class CreditCalculatorTests {
 
     @BeforeEach
     public void initCalc(){
-        creditCalculator = new CreditCalculator();
+        creditCalculator = new CreditCalculator(sum,percent,monthCount);
     }
 
     @AfterEach
@@ -24,7 +24,7 @@ public class CreditCalculatorTests {
         //double expected = 94614.57;
         BigDecimal expected = new BigDecimal(sum*((percent/12/100)+(percent/12/100)/(Math.pow(1+(percent/12/100), monthCount)-1))).setScale(2, RoundingMode.HALF_UP);
 
-        BigDecimal result = creditCalculator.monthlyPayment(sum, percent, monthCount);
+        BigDecimal result = creditCalculator.monthlyPayment();
 
         Assertions.assertEquals(result, expected);
 
@@ -35,7 +35,7 @@ public class CreditCalculatorTests {
         //double expected = 2270749.66;
         BigDecimal expected = new BigDecimal(monthCount*(sum*((percent/12/100)+(percent/12/100)/(Math.pow((1+percent/12/100), monthCount)-1)))).setScale(2, RoundingMode.HALF_UP);
 
-        BigDecimal result = creditCalculator.refundAmount(sum, percent, monthCount);
+        BigDecimal result = creditCalculator.refundAmount();
 
         Assertions.assertEquals(result, expected);
     }
@@ -45,7 +45,7 @@ public class CreditCalculatorTests {
         //double expected = 270750.66;
         BigDecimal expected = new BigDecimal(sum*((percent/12/100)+(percent/12/100)/(Math.pow(1+(percent/12/100), monthCount)-1))*monthCount-sum).setScale(2, RoundingMode.HALF_UP);
 
-        BigDecimal result = creditCalculator.overpayment(sum, percent, monthCount);
+        BigDecimal result = creditCalculator.overpayment();
 
         Assertions.assertEquals(result, expected);
     }
